@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SplashingActivity</string>
+    <string name="enter_email_address">Enter email address</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="Email_required">Email is required</string>
+    <string name="Password_required">Password is required</string>
+    <string name="Email_is_required">Email is required</string>
+    <string name="first_name_required">First name is required</string>
+    <string name="Last_name_required">Last name is required</string>
+</resources>
