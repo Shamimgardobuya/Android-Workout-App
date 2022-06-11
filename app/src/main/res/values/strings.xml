@@ -9,4 +9,8 @@
     <string name="Email_is_required">Email is required</string>
     <string name="first_name_required">First name is required</string>
     <string name="Last_name_required">Last name is required</string>
+    <string name="plan_item_android_id"><![CDATA[Plan/> <item android:id=]]></string>
+    <string name="track">Track</string>
+    <string name="profile">Profile</string>
+    <string name="plan">Plan</string>
 </resources>
