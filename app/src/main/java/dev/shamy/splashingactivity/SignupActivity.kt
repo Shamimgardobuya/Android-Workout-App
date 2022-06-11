@@ -75,6 +75,16 @@ class SignupActivity : AppCompatActivity() {
         if(confirMing.isBlank()){
             tilConfirm.error="Please input other fields"
         }
+        if(password2!=confirMing){                                      //if passwod does not match when confirming
+            tilPassword2.error="Password does not match"
+        }
+       if (password2.length<8){              // if passwordn is too short
+           println("Password is too short")
+       }
+       if (password2.length>16){                             //when password is too long.
+           println("Your password is too long")
+
+       }
 
     }
 }
