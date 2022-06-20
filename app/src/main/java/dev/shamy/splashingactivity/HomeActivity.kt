@@ -6,29 +6,33 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentContainer
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dev.shamy.splashingactivity.databinding.ActivityHomeBinding
 import dev.shamy.splashingactivity.databinding.ActivityLoginBinding
 
 class HomeActivity : AppCompatActivity() {
-    lateinit var bottom_navigation: BottomNavigationView
-    lateinit var fcvHome: FragmentContainerView
+//    lateinit var bottom_navigation: BottomNavigationView
+//    lateinit var fcvHome: FragmentContainerView
+    lateinit var binding:ActivityHomeBinding
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding=ActivityHomeBinding.inflate(layoutInflater)   //used binding
+        setContentView(binding.root)
         castViews()
         setupBottomNav()
 
     }
 
     fun castViews() {
-        bottom_navigation = findViewById(R.id.bnvHome)  //to cast them
-        fcvHome = findViewById(R.id.fcvHome)
+     binding.bnvHome
+     binding.fcvHome
 
     }
 
     fun setupBottomNav() {
-        bottom_navigation.setOnItemSelectedListener { item ->  //
+        binding.bnvHome.setOnItemSelectedListener { item ->  //
             when (item.itemId) {
                 R.id.plan -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fcvHome, PlanFragment())
