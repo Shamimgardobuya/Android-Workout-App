@@ -1,18 +1,19 @@
-package dev.shamy.splashingactivity
+package dev.shamy.splashingactivity.ui
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentContainer
-import androidx.fragment.app.FragmentContainerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import dev.shamy.splashingactivity.R
 import dev.shamy.splashingactivity.databinding.ActivityHomeBinding
-import dev.shamy.splashingactivity.databinding.ActivityLoginBinding
+import dev.shamy.splashingactivity.models.LoginResponse
+import kotlin.math.log
 
 class HomeActivity : AppCompatActivity() {
 //    lateinit var bottom_navigation: BottomNavigationView
 //    lateinit var fcvHome: FragmentContainerView
     lateinit var binding:ActivityHomeBinding
+    lateinit var sharedPrefs:SharedPreferences
 
 
 
@@ -22,6 +23,17 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         castViews()
         setupBottomNav()
+        binding.tvLogout.setOnClickListener {
+            val editor=sharedPrefs.edit()
+            editor.putString("ACCESS_TOKEN","")
+            editor.putString("USER_ID","")
+            editor.putString("PROFILE_ID","")
+            editor.apply()
+//            startActivity(Intent(this,LoginResponse::class.java))
+            startActivity(Intent(this,LoginResponse::class.java))
+            logOutrequest()
+
+        }
 
     }
 
@@ -54,6 +66,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
-
+fun logOutrequest(){
+    sharedPrefs.edit().clear().commit()
+}
 
 }
