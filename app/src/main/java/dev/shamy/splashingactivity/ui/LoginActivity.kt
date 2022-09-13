@@ -94,38 +94,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-//    fun makeLoginRequest(loginRequest:LoginRequest){
-//        var apiClient=ApiClient.buildApiClient(ApiInterface::class.java)
-//        var request=apiClient.login(loginRequest)
-//
-//        request.enqueue(object : Callback<LoginResponse> {
-//            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-//                if (response.isSuccessful){
-//                //data class for res
-//                    val loginResponse= response.body()
-//                    saveLoginDetails(loginResponse!!)
-//
-//                    Toast.makeText(baseContext,loginResponse?.message,Toast.LENGTH_LONG).show()
-//                    binding.pbLogin.visibility= View.GONE
-//
-//                    startActivity(Intent(baseContext,HomeActivity::class.java))
-//                    finish()
-//                }
-//                else{
-//                    val error=response.errorBody()?.string()
-//                    Toast.makeText(baseContext,error,Toast.LENGTH_LONG).show()
-//
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                binding.pbLogin.visibility= View.GONE
-//
-//                Toast.makeText(baseContext,t.message,Toast.LENGTH_LONG).show()
-//
-//            }
-//        })
-//    }
+
     fun saveLoginDetails(loginResponse: LoginResponse){
      val editor= sharedPrefs.edit()
      editor.putString("ACCESS_TOKEN",loginResponse.accessToken)
@@ -136,38 +105,9 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
-    fun logout(){
-//        binding.btnLogout.setOnClickListener( new OnClickListener() {
 
-//
-//            val public = null
-//            @Override
-//            public void onClick(View arg0) {
-//                SharedPreferences  = getSharedPreferences("Activity",  //small way of storing data to retrieve it
-//                MODE_PRIVATE);
-//                SharedPreferences.Editor editor = myPrefs.edit();
-//                editor.clear();   //cleaars all shared preferences
-//                editor.commit();
-//                //AppState.getSingleInstance().setLoggingOut(true);
-//                setLoginState(true);
-//                Log.d(TAG, "Now log out and start the activity login");
-//                Intent intent = new Intent(HomeActivity.this,
-//                    LoginActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
-//
-//            }
-//        });
-//
-//        private void setLoginState(boolean status) {
-//            SharedPreferences sp = getSharedPreferences("LoginState",
-//            MODE_PRIVATE);
-//            SharedPreferences.Editor ed = sp.edit();
-//            ed.putBoolean("setLoggingOut", status);
-//            ed.commit();
-//        }
     }
 
-}
+
 
 
