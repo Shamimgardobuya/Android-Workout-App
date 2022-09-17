@@ -13,6 +13,7 @@ import dev.shamy.splashingactivity.models.LoginRequest
 import dev.shamy.splashingactivity.models.LoginResponse
 import dev.shamy.splashingactivity.api.ApiClient
 import dev.shamy.splashingactivity.api.ApiInterface
+import dev.shamy.splashingactivity.util.Constants
 import dev.shamy.splashingactivity.viewmodel.UserViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -97,9 +98,11 @@ class LoginActivity : AppCompatActivity() {
 
     fun saveLoginDetails(loginResponse: LoginResponse){
      val editor= sharedPrefs.edit()
-     editor.putString("ACCESS_TOKEN",loginResponse.accessToken)
-     editor.putString("USER_ID",loginResponse.userId)
-     editor.putString("PROFILE_ID",loginResponse.userId)
+     val token = "Bearer ${loginResponse.accessToken}"
+
+     editor.putString(Constants.accessToken,token)      //enable to use Bearer with shared preferences
+     editor.putString(Constants.accessToken,loginResponse.userId)
+     editor.putString(Constants.accessToken,loginResponse.userId)
      editor.apply()
         
 

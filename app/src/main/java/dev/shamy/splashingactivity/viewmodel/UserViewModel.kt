@@ -7,18 +7,17 @@ import dev.shamy.splashingactivity.models.LoginRequest
 import dev.shamy.splashingactivity.models.LoginResponse
 import dev.shamy.splashingactivity.models.RegisterResponse
 import dev.shamy.splashingactivity.models.ReisterRequest
-import dev.shamy.splashingactivity.repository.RegisterRepository
 import dev.shamy.splashingactivity.repository.UserRepository
 import kotlinx.coroutines.launch
 
 class UserViewModel:ViewModel() {
 
      val userRepository=UserRepository()
-     val userRegister=RegisterRepository()
+//     val userRegister=RegisterRepository()
      var loginResponseLiveData= MutableLiveData<LoginResponse>()  //obser
      val loginErrorLiveData = MutableLiveData<String?>()  //for failure
      var registerResponseLiveData= MutableLiveData<RegisterResponse>()
-    val registerErrorLiveData = MutableLiveData<String?>()
+     val registerErrorLiveData = MutableLiveData<String?>()
 
     fun loginUser(loginRequest: LoginRequest){
         viewModelScope.launch {
@@ -37,7 +36,7 @@ class UserViewModel:ViewModel() {
     }
     fun registerUser(registerRequest: ReisterRequest){
         viewModelScope.launch {
-            val response=userRegister.registerUser(registerRequest)
+            val response=userRepository.registerUser(registerRequest)
             if (response.isSuccessful){
                 registerResponseLiveData.postValue((response.body()))
                 val error = response.errorBody()?.string()
@@ -49,4 +48,5 @@ class UserViewModel:ViewModel() {
             }
         }
     }
+
 }
