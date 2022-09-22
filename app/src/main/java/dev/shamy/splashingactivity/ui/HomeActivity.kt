@@ -32,17 +32,7 @@ class HomeActivity : AppCompatActivity() {
         val token=sharedPrefs.getString(Constants.accessToken,Constants.EMPTY_STRING)
         exerciseViewModel.fetchExerciseCategories(token!!) //never be null
 
-        binding.tvLogout.setOnClickListener {
-            val editor=sharedPrefs.edit()
-            editor.putString("ACCESS_TOKEN","")
-            editor.putString("USER_ID","")
-            editor.putString("PROFILE_ID","")
-            editor.apply()
-//            startActivity(Intent(this,LoginResponse::class.java))
-            startActivity(Intent(this,LoginResponse::class.java))
-            logOutrequest()
 
-        }
     }
 
     override fun onResume() {
@@ -93,8 +83,5 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
-fun logOutrequest(){
-    sharedPrefs.edit().clear().commit()
-}
 
 }

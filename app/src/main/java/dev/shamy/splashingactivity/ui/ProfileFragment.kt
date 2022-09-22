@@ -1,5 +1,7 @@
 package dev.shamy.splashingactivity.ui
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.icu.number.NumberFormatter.with
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,11 +14,24 @@ import com.squareup.picasso.NetworkPolicy
 //import com.squareup.picasso.Picasso
 import dev.shamy.splashingactivity.R
 import dev.shamy.splashingactivity.databinding.FragmentProfileBinding
+import dev.shamy.splashingactivity.models.LoginResponse
 
 
 class ProfileFragment : Fragment() {
+    lateinit var sharedPrefs: SharedPreferences
 
     override fun onCreateView(
+        binding.tvLogout.setOnClickListener {
+        val editor=sharedPrefs.edit()
+        editor.putString("ACCESS_TOKEN","")
+        editor.putString("USER_ID","")
+        editor.putString("PROFILE_ID","")
+        editor.apply()
+//            startActivity(Intent(this,LoginResponse::class.java))
+        startActivity(Intent(this, LoginResponse::class.java))
+        logOutrequest()
+
+    }
        var binding: FragmentProfileBinding
        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState:Bundle?
@@ -36,6 +51,10 @@ class ProfileFragment : Fragment() {
 
 
     }
+    fun logOutrequest(){
+        sharedPrefs.edit().clear().commit()
+    }
+
 
 
 }
