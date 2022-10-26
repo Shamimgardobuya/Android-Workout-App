@@ -24,6 +24,7 @@ class SignupActivity : AppCompatActivity() {
     val userViewModel: UserViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
           binding=ActivitySignupBinding.inflate(layoutInflater)   //used binding
           setContentView(binding.root)
 

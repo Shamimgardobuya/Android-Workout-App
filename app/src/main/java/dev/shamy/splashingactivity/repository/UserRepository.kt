@@ -3,6 +3,7 @@ package dev.shamy.splashingactivity.repository
 import dev.shamy.splashingactivity.api.ApiClient
 import dev.shamy.splashingactivity.api.ApiInterface
 import dev.shamy.splashingactivity.models.LoginRequest
+import dev.shamy.splashingactivity.models.ProfileRequest
 import dev.shamy.splashingactivity.models.ReisterRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,12 +22,10 @@ class UserRepository {
 
 
     }
-//class RegisterRepository{
-//    val apiClient = ApiClient.buildApiClient(ApiInterface::class.java)
-//    suspend fun registerUser(registerRequest: ReisterRequest) = withContext(Dispatchers.IO) {
-//        val response = apiClient.registerUser(registerRequest)   //invoking function of register
+//    suspend fun profileMe(profileRequest: ProfileRequest)= withContext(Dispatchers.IO){
+//        val response=apiClient.profileMe(profileRequest)
 //        return@withContext response
+//    }
 
 
     }
-//}

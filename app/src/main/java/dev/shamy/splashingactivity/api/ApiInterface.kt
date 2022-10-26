@@ -12,9 +12,18 @@ import retrofit2.http.Header
 interface ApiInterface {
     @POST("/register")
     suspend fun registerUser(@Body registerRequest:ReisterRequest):Response<RegisterResponse>
+
     @POST("/login")
     suspend  fun  login(@Body loginRequest:LoginRequest):Response<LoginResponse>
+
     @GET("exercise-cateories")
     suspend fun fetchExerciseCategories(@Header("Authorization")accessToken:String):Response<List<ExerciseCategory>>
+
+    @POST ("/profile")
+    suspend fun createProfile (@Body createProfilerequest :ProfileRequest) : Response<ProfileResponse>
+    @GET ("/exercises")
+    suspend fun fetchExercises(@Header("Authorization")accessToken:String):Response<List<ExerciseRequest>>
+
+
 
 }

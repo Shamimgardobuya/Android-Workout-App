@@ -20,6 +20,8 @@ class HomeActivity : AppCompatActivity() {
     lateinit var sharedPrefs:SharedPreferences
     val exerciseViewModel:ExerciseViewModel by viewModels()
     lateinit var sharedPreferences: SharedPreferences
+    lateinit var token:String
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,26 +31,31 @@ class HomeActivity : AppCompatActivity() {
         castViews()
         setupBottomNav()
         sharedPrefs=getSharedPreferences(Constants.prefsFile, MODE_PRIVATE)
-        val token=sharedPrefs.getString(Constants.accessToken,Constants.EMPTY_STRING)
-        exerciseViewModel.fetchExerciseCategories(token!!) //never be null
+        token = sharedPrefs.getString(Constants.accessToken, "").toString()
+
+        exerciseViewModel.getDbCategories()
+        exerciseViewModel.getDbExercises()
+
 
 
     }
 
     override fun onResume() {
         super.onResume()
-        exerciseViewModel.exerciseCategoryLiveData.observe(this, Observer {
-            exerciseCateg->
+        exerciseViewModel.exerciseCategoryLiveData.observe(this, Observer { categories->
+            if (categories.isEmpty()){
+                exerciseViewModel.fetchExerciseCategories(token)
+            }
+        })
 
-            Toast.makeText( baseContext,"fetached ${exerciseCateg.size} categosries ",
-            Toast.LENGTH_LONG
-                ).show()
-        }  )
-        exerciseViewModel.errorLiveData.observe(this, Observer {
-            error->
-            Toast.makeText(this,error,Toast.LENGTH_LONG).show()
+        exerciseViewModel.exerciseLiveData.observe(this, Observer { exercises->
+            if (exercises.isEmpty()){
+                exerciseViewModel.fetchExercises(token)
+            }
+        })
 
-
+        exerciseViewModel.errorLiveData.observe(this, Observer { error->
+            Toast.makeText(this, error, Toast.LENGTH_LONG).show()
         })
 
     }
@@ -75,7 +82,7 @@ class HomeActivity : AppCompatActivity() {
                 }
                 R.id.profile -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fcvHome, ProfileFragment()).commit()
+                        .replace(R.id.fcvHome,ProfileFragment()).commit()
                     true
                 }
                 else -> false

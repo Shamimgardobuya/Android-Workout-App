@@ -31,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
       lateinit var sharedPrefs:SharedPreferences
       val userViewModel:UserViewModel by viewModels()   //instance of view,o
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_login)
