@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "ExerciseCategory")
 data class ExerciseCategory(
-    @PrimaryKey @SerializedName("category_id") var categoryId:String,  //not exact way retrofit called it.
+    @PrimaryKey @SerializedName("category_id") var categoryId:String,
     @SerializedName("category_name") var categoryName:String,
 
     )

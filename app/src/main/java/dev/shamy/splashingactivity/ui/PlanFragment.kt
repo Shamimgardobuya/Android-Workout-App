@@ -1,6 +1,9 @@
 package dev.shamy.splashingactivity.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.SyncStateContract.Constants
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,18 +15,24 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import dev.shamy.splashingactivity.R
 import dev.shamy.splashingactivity.databinding.FragmentPlanBinding
-import dev.shamy.splashingactivity.databinding.FragmentProfileBinding
 import dev.shamy.splashingactivity.models.ExerciseCategory
 import dev.shamy.splashingactivity.models.ExerciseRequest
+import dev.shamy.splashingactivity.models.WorkoutPlan
+import dev.shamy.splashingactivity.utils.Constants.Companion
 import dev.shamy.splashingactivity.viewmodel.ExerciseViewModel
+import dev.shamy.splashingactivity.viewmodel.WorkoutPlanViewModel
+import java.util.*
+import kotlin.collections.HashMap
 
 class PlanFragment : Fragment() {
     val exerciseViewModel: ExerciseViewModel by viewModels()
+    val workoutPlanViewModel:WorkoutPlanViewModel by viewModels()
     lateinit var exerciseLiveData: LiveData<List<ExerciseRequest>>
+    lateinit var sharedPrefs: SharedPreferences
 
     var binding: FragmentPlanBinding? = null
+    lateinit var workout_plan_id:String
     val bind get() = binding!!
 
     override fun onCreateView(
@@ -41,6 +50,7 @@ class PlanFragment : Fragment() {
         setupCategorySpinner()
         setupExerciseSpinner()
         bind.btnAdd.setOnClickListener { clickAddItem() }
+        checkForExistingWorkout()
     }
 
     fun setupDaySpinner(){
@@ -73,7 +83,7 @@ class PlanFragment : Fragment() {
     }
     fun setupExerciseSpinner(){
              exerciseLiveData.observe(this, Observer { exercises->
-                 val firstExercise=ExerciseRequest("0","","","Selecct Exercise")
+                 val firstExercise=ExerciseRequest("0","","","Selecct Exercise","")
                  val exerciseAdapter=ExerciseAdapter(requireContext(),exercises)
                  bind.spMyexercise.adapter=exerciseAdapter
 
@@ -108,9 +118,7 @@ class PlanFragment : Fragment() {
             val day=bind.spDay.selectedItem.toString()
             bind.spMyexercise.setSelection(0)
             bind.spCategory.setSelection(0)
-            exerciseViewModel.selectedExerciseIds()
-
-
+            workoutPlanViewModel.selectedExerciseIds.add(selectedExercise.exerciseId)
 
 
 
@@ -119,10 +127,51 @@ class PlanFragment : Fragment() {
 
 
     }
+    fun checkForExistingWorkout(){
+        val prefs= requireActivity().getSharedPreferences(Companion.SHARED_PREFSFILE,Context.MODE_PRIVATE)
+        val userId=prefs.getString(Companion.USER_ID ,Companion.EMPTYSTRING).toString()
+        workoutPlanViewModel.getExistingWorkoutPlan(userId)
+        workoutPlanViewModel.workoutPlanLiveData
+            .observe(this,Observer{
+                workoutPlan ->
+                if(workoutPlan==null){
+                    val newWorkoutPlan=WorkoutPlan(UUID.randomUUID().toString(),userId)
+                    workoutPlanViewModel.saveWorkoutPlan(newWorkoutPlan)
+
+
+                }
+                else{
+                    workout_plan_id=workoutPlan.workout_plan_id
+                }
+
+            })
+
+    }
     override fun onDestroy() {
         super.onDestroy()
         binding = null
     }
-
-
+fun getDayNumber(day:String):Int?{
+    val dayMap = HashMap<String,Int>()
+    dayMap.put("Monday",1)
+    dayMap.put("Tuesday",2)
+    dayMap.put("Wednesday",3)
+    dayMap.put("Thursday",4)
+    dayMap.put("Friday",5)
+    dayMap.put("Saturday",6)
+    dayMap.put("Sunday",7)
+    return dayMap.get(day) ?:-1
+}
+    fun clickSaveDay() {
+        if(bind.spDay.selectedItemPosition==0){
+            Toast.makeText(requireContext(),"Selected Day",Toast.LENGTH_LONG).show()
+            return
+        }
+        val day = bind.spDay.selectedItem.toString()
+        val dayNumber=getDayNumber(day)
+       if( workoutPlanViewModel.selectedExerciseIds.isEmpty()){
+           Toast.makeText(requireContext(),"Select some exercises for the $day",Toast.LENGTH_LONG).show()
+           return
+       }
+    }
 }

@@ -21,6 +21,7 @@ interface ApiInterface {
 
     @POST ("/profile")
     suspend fun createProfile (@Body createProfilerequest :ProfileRequest) : Response<ProfileResponse>
+
     @GET ("/exercises")
     suspend fun fetchExercises(@Header("Authorization")accessToken:String):Response<List<ExerciseRequest>>
 

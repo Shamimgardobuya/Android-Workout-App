@@ -7,12 +7,13 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "Exercise")
 data class ExerciseRequest(
-  @PrimaryKey @SerializedName("exercise_id")     var exerciseId:String,
+  @PrimaryKey @SerializedName("exercise_id") var exerciseId:String,
 
   @SerializedName("categoryId")  var category_id:String,
-  @SerializedName("image")  var image:String,
 
   @SerializedName ("exercise_name")var exercise_name:String,
 
+  var image : String?,
+  var description: String?,
 )
 

@@ -11,13 +11,16 @@ import kotlinx.coroutines.launch
 
 class ExerciseViewModel : ViewModel(){
 
-   val exerciseRepository=ExerciseRepository()
-   lateinit var exerciseCategoryLiveData: LiveData<List<ExerciseCategory>>
-   lateinit var exerciseLiveData: LiveData<List<ExerciseRequest>>
-   val errorLiveData=MutableLiveData<String?>()
+       val exerciseRepository=ExerciseRepository()
+       lateinit var exerciseCategoryLiveData: LiveData<List<ExerciseCategory>>
+       lateinit var exerciseLiveData: LiveData<List<ExerciseRequest>>
+       val errorLiveData=MutableLiveData<String?>()
+//       var selectedExerciseIds= mutableListOf<String>()
 
 
-fun fetchExerciseCategories(accessToken:String) {
+
+
+    fun fetchExerciseCategories(accessToken:String) {
     viewModelScope.launch {
         val response = exerciseRepository.fetchExerciseCategories(accessToken)
         if (!response.isSuccessful) {

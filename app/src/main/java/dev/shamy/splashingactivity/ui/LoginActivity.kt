@@ -11,13 +11,8 @@ import androidx.lifecycle.Observer
 import dev.shamy.splashingactivity.databinding.ActivityLoginBinding
 import dev.shamy.splashingactivity.models.LoginRequest
 import dev.shamy.splashingactivity.models.LoginResponse
-import dev.shamy.splashingactivity.api.ApiClient
-import dev.shamy.splashingactivity.api.ApiInterface
-import dev.shamy.splashingactivity.util.Constants
+import dev.shamy.splashingactivity.uutils.Constants
 import dev.shamy.splashingactivity.viewmodel.UserViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 //    lateinit var btnLogin:Button

@@ -13,10 +13,12 @@ interface ExerciseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertExercise(exercise: ExerciseRequest)
 
-
     @Query("SELECT * FROM Exercise")
     fun getExercises(): LiveData<List<ExerciseRequest>>
 
     @Query("SELECT * FROM Exercise WHERE category_id= :selectedCategoryId")
     fun getExercisesByCategoryId(selectedCategoryId: String):LiveData<List<ExerciseRequest>>
+
+    @Query("SELECT * FROM Exercise WHERE exerciseId  IN (:todayExerciseIds)")
+    fun getTodayExercisesByExerciseIds(todayExerciseIds:List<String>)
 }

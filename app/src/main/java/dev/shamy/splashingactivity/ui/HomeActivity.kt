@@ -1,6 +1,5 @@
 package dev.shamy.splashingactivity.ui
 
-import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,10 +8,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dev.shamy.splashingactivity.R
 import dev.shamy.splashingactivity.databinding.ActivityHomeBinding
-import dev.shamy.splashingactivity.models.LoginResponse
-import dev.shamy.splashingactivity.util.Constants
+import dev.shamy.splashingactivity.uutils.Constants
 import dev.shamy.splashingactivity.viewmodel.ExerciseViewModel
-import kotlin.math.log
 
 class HomeActivity : AppCompatActivity() {
 

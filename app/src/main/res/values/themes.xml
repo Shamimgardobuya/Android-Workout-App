@@ -16,5 +16,11 @@
     <style name="splashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/backgroundsplash</item>
         <item name="android:windowFullscreen">true</item>
+
     </style>
+<!--    <style name="BoldTextView">-->
+<!--    <item name="android:fontFamily"> sans-serif-condensed</item>-->
+<!--    <item name="android:teXt"> sans-serif-condensed</item>-->
+
+
 </resources>

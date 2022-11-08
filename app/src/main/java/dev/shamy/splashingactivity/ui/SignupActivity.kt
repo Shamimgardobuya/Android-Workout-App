@@ -37,11 +37,6 @@ class SignupActivity : AppCompatActivity() {
           
 
         }
-
-
-
-
-
     }
     override fun onResume() {///observing live datas
         super.onResume()

@@ -10,6 +10,7 @@ import dev.shamy.splashingactivity.models.ExerciseRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import java.sql.RowId
 
 //import okhttp3.Response
 
@@ -57,6 +58,9 @@ class ExerciseRepository {
     fun getExerciseByCategory(categoryId:String):LiveData<List<ExerciseRequest>>{
         return  exerciseDao.getExercisesByCategoryId(categoryId)
 
+    }
+    fun getExercisesByExerciseIds(exerciseId: List<String>):LiveData<List<ExerciseRequest>>{
+        return exerciseDao.getTodayExercisesByExerciseIds(exerciseId)
     }
 
 }
